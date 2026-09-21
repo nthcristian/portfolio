@@ -1,0 +1,12 @@
+name: null
+shell: fish
+packages:
+- nodejs
+- pnpm
+- fish
+- openssh
+x11: false
+wayland: false
+pipewire: false
+gpu: false
+network: bridge
