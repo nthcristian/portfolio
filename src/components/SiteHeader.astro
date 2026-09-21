@@ -1,0 +1,53 @@
+---
+interface NavigationItem {
+    readonly label: string;
+    readonly href: string;
+}
+
+interface Props {
+    readonly name: string;
+    readonly monogram: string;
+    readonly navigation: readonly NavigationItem[];
+    readonly skipLabel: string;
+    readonly navigationLabel: string;
+}
+
+const { name, monogram, navigation, skipLabel, navigationLabel } = Astro.props;
+---
+
+<a class="skip-link" href="#main-content">
+    {skipLabel}
+</a>
+<header class="mx-auto flex w-full max-w-[90rem] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:px-12">
+    <a
+        class="group flex items-center gap-3"
+        href="#main-content"
+        aria-label={name}
+    >
+        <span class="grid size-9 place-items-center border border-[var(--line-strong)] bg-[var(--ink-raised)] font-mono text-xs text-[var(--cyan)] transition-colors group-hover:border-[var(--cyan)]">
+            {monogram}
+        </span>
+        <span class="hidden text-sm font-medium tracking-tight text-[var(--paper)] sm:block">
+            {name}
+        </span>
+    </a>
+
+    <nav aria-label={navigationLabel}>
+        <ul class="flex items-center gap-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[var(--muted)] sm:gap-6">
+            {navigation.map((item, index) => (
+                <li>
+                    <a
+                        class="transition-colors hover:text-[var(--paper)] focus-visible:text-[var(--paper)]"
+                        href={item.href}
+                        data-section-nav
+                    >
+                        <span class="mr-1 text-[var(--green)]">
+                            0{index + 1}
+                        </span>
+                        {item.label}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+</header>

@@ -1,0 +1,265 @@
+---
+import type { ProjectVisual } from "../content/portfolio/schema";
+
+interface Props {
+    readonly kind: ProjectVisual;
+}
+
+const { kind } = Astro.props;
+---
+
+<div
+    class:list={["atlas-project-visual", `atlas-project-visual--${kind}`]}
+    aria-hidden="true"
+>
+    {kind === "container" && (
+        <svg
+            viewBox="0 0 600 420"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <rect
+                x="32"
+                y="43"
+                width="536"
+                height="330"
+                rx="10"
+                class="atlas-frame"
+            />
+            <path d="M32 96H568M81 43V373M519 43V373" class="atlas-gridline" />
+            <rect
+                x="112"
+                y="133"
+                width="174"
+                height="151"
+                rx="8"
+                class="atlas-box atlas-box-green"
+            />
+            <path
+                d="M139 167H260M139 190H232M139 213H250M139 236H205"
+                class="atlas-detail atlas-detail-green"
+            />
+            <rect
+                x="347"
+                y="133"
+                width="141"
+                height="151"
+                rx="8"
+                class="atlas-box"
+            />
+            <path
+                d="M373 167H460M373 190H438M373 213H454M373 236H420"
+                class="atlas-detail"
+            />
+            <path
+                d="M287 208H345M333 198L345 208L333 218"
+                class="atlas-signal"
+                data-signal-path
+            />
+            <circle cx="112" cy="133" r="7" class="atlas-dot-green" />
+            <circle cx="488" cy="284" r="7" class="atlas-dot-cyan" />
+        </svg>
+    )}
+    {kind === "mcp" && (
+        <svg
+            viewBox="0 0 600 420"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <circle cx="300" cy="210" r="75" class="atlas-ring" />
+            <circle
+                cx="300"
+                cy="210"
+                r="43"
+                class="atlas-ring atlas-ring-inner"
+            />
+            <path
+                d="M300 50V134M300 286V370M102 210H215M385 210H498"
+                class="atlas-signal"
+                data-signal-path
+            />
+            <path
+                d="M290 123L300 134L310 123M290 359L300 370L310 359M204 200L215 210L204 220M487 200L498 210L487 220"
+                class="atlas-signal"
+                data-signal-path
+            />
+            <rect
+                x="252"
+                y="177"
+                width="96"
+                height="66"
+                rx="10"
+                class="atlas-box atlas-box-green"
+            />
+            <rect
+                x="242"
+                y="36"
+                width="116"
+                height="40"
+                rx="8"
+                class="atlas-box"
+            />
+            <rect
+                x="242"
+                y="344"
+                width="116"
+                height="40"
+                rx="8"
+                class="atlas-box atlas-box-cyan"
+            />
+            <rect
+                x="42"
+                y="184"
+                width="116"
+                height="52"
+                rx="8"
+                class="atlas-box"
+            />
+            <rect
+                x="442"
+                y="184"
+                width="116"
+                height="52"
+                rx="8"
+                class="atlas-box"
+            />
+            <circle cx="300" cy="210" r="12" class="atlas-dot-gold" />
+        </svg>
+    )}
+    {kind === "review" && (
+        <svg
+            viewBox="0 0 600 420"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <rect
+                x="39"
+                y="35"
+                width="522"
+                height="348"
+                rx="10"
+                class="atlas-frame"
+            />
+            <path d="M39 92H561" class="atlas-gridline" />
+            <path d="M79 62H216" class="atlas-detail" />
+            <rect
+                x="75"
+                y="128"
+                width="120"
+                height="215"
+                rx="7"
+                class="atlas-box"
+            />
+            <path
+                d="M102 161H168M102 190H151M102 219H173M102 248H143"
+                class="atlas-detail"
+            />
+            <rect
+                x="230"
+                y="128"
+                width="127"
+                height="215"
+                rx="7"
+                class="atlas-box atlas-box-green"
+            />
+            <rect
+                x="254"
+                y="153"
+                width="79"
+                height="89"
+                rx="4"
+                class="atlas-surface-green"
+            />
+            <path d="M254 275H329M254 299H307" class="atlas-detail" />
+            <rect
+                x="392"
+                y="128"
+                width="127"
+                height="215"
+                rx="7"
+                class="atlas-box"
+            />
+            <rect
+                x="416"
+                y="153"
+                width="79"
+                height="89"
+                rx="4"
+                class="atlas-surface-cyan"
+            />
+            <path d="M416 275H491M416 299H469" class="atlas-detail" />
+            <path
+                d="M278 115V100H453V115"
+                class="atlas-signal"
+                data-signal-path
+            />
+        </svg>
+    )}
+    {kind === "planner" && (
+        <svg
+            viewBox="0 0 600 420"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <rect
+                x="39"
+                y="35"
+                width="522"
+                height="348"
+                rx="10"
+                class="atlas-frame"
+            />
+            <path d="M39 92H561" class="atlas-gridline" />
+            <path d="M82 63H207" class="atlas-detail" />
+            <rect
+                x="77"
+                y="129"
+                width="130"
+                height="210"
+                rx="7"
+                class="atlas-box"
+            />
+            <path
+                d="M105 164H177M105 196H159M105 228H174M105 260H150"
+                class="atlas-detail"
+            />
+            <rect
+                x="244"
+                y="129"
+                width="244"
+                height="210"
+                rx="7"
+                class="atlas-box"
+            />
+            <path
+                d="M244 181H488M244 233H488M305 129V339M366 129V339M427 129V339"
+                class="atlas-gridline"
+            />
+            <rect
+                x="315"
+                y="190"
+                width="41"
+                height="33"
+                rx="4"
+                class="atlas-surface-green"
+            />
+            <rect
+                x="376"
+                y="242"
+                width="41"
+                height="33"
+                rx="4"
+                class="atlas-surface-cyan"
+            />
+            <rect
+                x="437"
+                y="190"
+                width="30"
+                height="33"
+                rx="4"
+                class="atlas-surface-gold"
+            />
+            <path d="M305 160H467" class="atlas-signal" data-signal-path />
+        </svg>
+    )}
+</div>

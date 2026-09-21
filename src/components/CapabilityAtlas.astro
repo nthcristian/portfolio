@@ -1,0 +1,35 @@
+---
+import type { CapabilityGroup } from "../content/portfolio/schema";
+
+interface Props {
+    readonly groups: readonly CapabilityGroup[];
+}
+
+const { groups } = Astro.props;
+---
+
+<div class="capability-atlas">
+    {groups.map((group, index) => (
+        <article
+            class={`capability-zone capability-zone--${index + 1}`}
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+        >
+            <div class="capability-geometry" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p class="font-mono text-[0.66rem] text-[var(--cyan)]">
+                0{index + 1}
+            </p>
+            <h3>{group.title}</h3>
+            <ul>
+                {group.items.map((item) => (
+                    <li>{item}</li>
+                ))}
+            </ul>
+        </article>
+    ))}
+</div>

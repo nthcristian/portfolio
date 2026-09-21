@@ -1,0 +1,1187 @@
+@import "tailwindcss";
+
+:root {
+    color-scheme: dark;
+    --ink: #090d12;
+    --ink-raised: #0e141c;
+    --ink-soft: #121b25;
+    --paper: #edf4ee;
+    --paper-soft: #d1ddd5;
+    --muted: #78877e;
+    --muted-strong: #a9b8ae;
+    --line: #243229;
+    --line-strong: #3a5345;
+    --green: #7fb95c;
+    --cyan: #79d9d0;
+    --gold: #d7a85c;
+}
+
+html {
+    background: var(--ink);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 20rem;
+    overflow-x: clip;
+    background:
+        radial-gradient(
+            circle at 80% -10%,
+            rgb(75 131 103 / 16%),
+            transparent 28rem
+        ),
+        var(--ink);
+    color: var(--paper);
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background: rgb(131 185 94 / 40%);
+    color: var(--paper);
+}
+:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+}
+
+.skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 1rem;
+    left: 1rem;
+    transform: translateY(-200%);
+    border: 1px solid var(--cyan);
+    background: var(--ink);
+    padding: 0.6rem 0.85rem;
+    color: var(--paper);
+    font-size: 0.8rem;
+}
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+.terminal-panel {
+    background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 1.4rem 1.4rem;
+    background-position: -1px -1px;
+    box-shadow:
+        0 0 0 1px rgb(131 185 94 / 10%),
+        0 1.5rem 5rem rgb(0 0 0 / 25%);
+}
+.hero-portrait::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgb(123 221 212 / 30%);
+    content: "";
+    pointer-events: none;
+}
+.action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border: 1px solid var(--line-strong);
+    background: rgb(14 20 20 / 82%);
+    padding: 0.7rem 0.85rem;
+    color: var(--paper-soft);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    transition:
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 160ms ease;
+}
+.action-link:hover {
+    transform: translateY(-2px);
+    border-color: var(--cyan);
+    color: var(--cyan);
+}
+
+.motion-ready [data-section-nav].is-active {
+    color: var(--paper);
+}
+.motion-ready [data-section-nav].is-active span {
+    color: var(--cyan);
+    text-shadow: 0 0 0.8rem rgb(123 221 212 / 70%);
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--green);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+.eyebrow span {
+    color: var(--cyan);
+}
+
+.atlas-shell {
+    width: min(100% - 2.5rem, 90rem);
+    margin-inline: auto;
+}
+.atlas-section {
+    position: relative;
+    padding-block: clamp(5rem, 11vw, 10rem);
+}
+.atlas-section::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--line-strong),
+        transparent
+    );
+    content: "";
+}
+
+.atlas-intro {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(115deg, rgb(131 185 94 / 12%), transparent 44%),
+        linear-gradient(90deg, rgb(123 221 212 / 5%) 1px, transparent 1px),
+        var(--ink-raised);
+    background-size:
+        auto,
+        1.8rem 1.8rem;
+    padding: clamp(1.75rem, 5vw, 4.5rem);
+    isolation: isolate;
+}
+.atlas-intro::before {
+    position: absolute;
+    z-index: -1;
+    right: 4%;
+    bottom: -20%;
+    width: 16rem;
+    aspect-ratio: 1;
+    border: 1px solid rgb(213 173 100 / 35%);
+    border-radius: 50%;
+    content: "";
+}
+.atlas-intro-copy h2 {
+    max-width: 50rem;
+    margin-top: 1.4rem;
+    font-size: clamp(2.8rem, 7.5vw, 6.7rem);
+    font-weight: 600;
+    letter-spacing: -0.075em;
+    line-height: 0.86;
+    text-wrap: balance;
+}
+.atlas-intro-copy > p:last-child {
+    max-width: 36rem;
+    margin-top: 2rem;
+    color: var(--muted-strong);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+.atlas-constellation {
+    position: relative;
+    min-height: 16rem;
+}
+.atlas-constellation svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+.atlas-path {
+    stroke: var(--cyan);
+    stroke-width: 1.25;
+    stroke-dasharray: 5 6;
+    opacity: 0.7;
+}
+.atlas-path-soft {
+    stroke: var(--green);
+    opacity: 0.35;
+}
+.atlas-node {
+    stroke: var(--ink);
+    stroke-width: 5;
+}
+.atlas-node-green {
+    fill: var(--green);
+}
+.atlas-node-cyan {
+    fill: var(--cyan);
+}
+.atlas-node-gold {
+    fill: var(--gold);
+}
+.atlas-orbit {
+    position: absolute;
+    border: 1px solid rgb(131 185 94 / 32%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.atlas-orbit-one {
+    top: 15%;
+    right: 9%;
+    width: 8rem;
+    height: 8rem;
+}
+.atlas-orbit-two {
+    bottom: 3%;
+    left: 12%;
+    width: 5rem;
+    height: 5rem;
+    border-color: rgb(123 221 212 / 30%);
+}
+
+.atlas-section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2.5rem, 6vw, 5.5rem);
+}
+.atlas-section-heading h2 {
+    margin-top: 1rem;
+    font-size: clamp(2.6rem, 5vw, 4.8rem);
+    font-weight: 600;
+    letter-spacing: -0.07em;
+    line-height: 0.88;
+}
+.atlas-section-heading > p {
+    max-width: 23rem;
+    color: var(--muted-strong);
+    line-height: 1.75;
+}
+
+.atlas-chapters {
+    display: grid;
+    gap: clamp(4rem, 11vw, 10rem);
+}
+.atlas-chapter {
+    position: relative;
+    display: grid;
+    gap: 1.5rem;
+    isolation: isolate;
+}
+.atlas-chapter-serial {
+    position: absolute;
+    z-index: -1;
+    top: -3.5rem;
+    right: -0.4rem;
+    color: rgb(131 185 94 / 8%);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(10rem, 25vw, 23rem);
+    font-weight: 600;
+    letter-spacing: -0.15em;
+    line-height: 1;
+    pointer-events: none;
+}
+.atlas-chapter-visual-wrap {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: #0b1110;
+}
+.atlas-chapter-visual-wrap::after {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        rgb(123 221 212 / 14%),
+        transparent 34%
+    );
+    content: "";
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+.atlas-chapter.is-pointing .atlas-chapter-visual-wrap::after {
+    opacity: 1;
+}
+.atlas-project-visual {
+    position: relative;
+    min-height: 18rem;
+    padding: 1rem;
+    background:
+        linear-gradient(90deg, rgb(131 185 94 / 7%) 1px, transparent 1px),
+        linear-gradient(rgb(131 185 94 / 7%) 1px, transparent 1px), #0a100f;
+    background-size: 1.4rem 1.4rem;
+}
+.atlas-project-visual::before {
+    position: absolute;
+    top: 1.1rem;
+    left: 1.1rem;
+    width: 4rem;
+    height: 1px;
+    background: var(--green);
+    content: "";
+    box-shadow: 1.3rem 1.3rem 0 -0.2px var(--cyan);
+}
+.atlas-project-visual svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 18rem;
+}
+.atlas-chapter-copy {
+    position: relative;
+    border-left: 1px solid var(--line-strong);
+    padding: 1.5rem 0 0 1.25rem;
+}
+.atlas-chapter-copy h3 {
+    margin-top: 1.25rem;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 600;
+    letter-spacing: -0.065em;
+    line-height: 0.9;
+}
+.atlas-summary {
+    margin-top: 1.25rem;
+    color: var(--paper-soft);
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+.atlas-details {
+    max-width: 38rem;
+    margin-top: 1rem;
+    color: var(--muted-strong);
+    line-height: 1.75;
+}
+.atlas-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.5rem;
+}
+.atlas-stack li {
+    border: 1px solid var(--line);
+    padding: 0.28rem 0.45rem;
+    color: var(--muted-strong);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.64rem;
+}
+.atlas-source {
+    display: inline-flex;
+    gap: 0.5rem;
+    margin-top: 1.7rem;
+    color: var(--cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    transition: color 160ms ease;
+}
+.atlas-source:hover {
+    color: var(--paper);
+}
+
+.atlas-frame {
+    fill: #0b1110;
+    stroke: var(--line-strong);
+}
+.atlas-gridline {
+    stroke: #385044;
+    stroke-width: 1.4;
+}
+.atlas-detail {
+    stroke: #72867a;
+    stroke-width: 2;
+}
+.atlas-detail-green {
+    stroke: var(--green);
+}
+.atlas-signal {
+    stroke: var(--cyan);
+    stroke-width: 2;
+}
+.atlas-box {
+    fill: #101a17;
+    stroke: #4a6555;
+    stroke-width: 1.5;
+}
+.atlas-box-green {
+    fill: rgb(131 185 94 / 14%);
+    stroke: var(--green);
+}
+.atlas-box-cyan {
+    fill: rgb(123 221 212 / 12%);
+    stroke: var(--cyan);
+}
+.atlas-ring {
+    stroke: #4a6555;
+    stroke-width: 1.5;
+}
+.atlas-ring-inner {
+    stroke: var(--green);
+    stroke-dasharray: 4 7;
+}
+.atlas-dot-green {
+    fill: var(--green);
+}
+.atlas-dot-cyan {
+    fill: var(--cyan);
+}
+.atlas-dot-gold {
+    fill: var(--gold);
+}
+.atlas-surface-green {
+    fill: rgb(131 185 94 / 38%);
+}
+.atlas-surface-cyan {
+    fill: rgb(123 221 212 / 35%);
+}
+.atlas-surface-gold {
+    fill: rgb(213 173 100 / 42%);
+}
+.motion-ready .atlas-chapter.is-active [data-signal-path] {
+    stroke-dasharray: 8 7;
+    animation: atlas-signal-flow 1.5s linear infinite;
+}
+.motion-ready .atlas-chapter.is-active .atlas-ring-inner {
+    animation: atlas-orbit-spin 10s linear infinite;
+    transform-origin: center;
+}
+
+.about-sheet {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.8rem minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(135deg, rgb(123 221 212 / 7%), transparent 45%),
+        var(--ink-raised);
+}
+.about-ruler {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    border-right: 1px solid var(--line);
+    background: #0a100f;
+    padding-top: 2rem;
+    color: #506359;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.61rem;
+    text-align: center;
+}
+.about-content {
+    padding: clamp(1.5rem, 5vw, 4.7rem);
+}
+.about-content h2 {
+    max-width: 55rem;
+    margin-top: 1.5rem;
+    font-size: clamp(2.5rem, 6vw, 5.7rem);
+    font-weight: 600;
+    letter-spacing: -0.075em;
+    line-height: 0.87;
+}
+.about-prose {
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 2.8rem;
+    color: var(--muted-strong);
+    font-size: 1.02rem;
+    line-height: 1.9;
+}
+.about-signal {
+    margin-top: 2.5rem;
+    border-left: 2px solid var(--green);
+    background: rgb(8 11 12 / 55%);
+    padding: 1rem 1.15rem;
+    color: var(--paper-soft);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.72rem;
+    line-height: 1.7;
+}
+.about-signal span {
+    margin-right: 0.5rem;
+    color: var(--green);
+}
+.about-stamp {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.about-stamp span {
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border: 1px solid var(--cyan);
+    border-radius: 50%;
+}
+.about-stamp span:nth-child(2) {
+    background: var(--green);
+    border-color: var(--green);
+}
+.about-stamp span:nth-child(3) {
+    border-color: var(--gold);
+}
+
+.capability-atlas {
+    display: grid;
+    gap: 0.75rem;
+}
+.capability-zone {
+    position: relative;
+    overflow: hidden;
+    min-height: 15rem;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(125deg, rgb(131 185 94 / 8%), transparent 42%),
+        var(--ink-raised);
+    padding: 1.5rem;
+}
+.capability-zone h3 {
+    margin-top: 2.3rem;
+    font-size: 1.55rem;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+}
+.capability-zone ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1.3rem;
+}
+.capability-zone li {
+    border: 1px solid var(--line);
+    padding: 0.27rem 0.42rem;
+    color: var(--muted-strong);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.65rem;
+}
+.capability-geometry span {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+}
+.capability-geometry span:nth-child(1) {
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--green);
+}
+.capability-geometry span:nth-child(2) {
+    top: 2.25rem;
+    right: 2.25rem;
+    width: 3rem;
+    border-top: 1px solid var(--cyan);
+}
+.capability-geometry span:nth-child(3) {
+    right: 1.1rem;
+    bottom: 1.1rem;
+    width: 4.2rem;
+    height: 1px;
+    background: var(--line-strong);
+}
+.capability-geometry span:nth-child(4) {
+    right: 1.1rem;
+    bottom: 1.1rem;
+    width: 1px;
+    height: 4.2rem;
+    background: var(--line-strong);
+}
+.capability-zone--2 {
+    background:
+        linear-gradient(125deg, rgb(123 221 212 / 8%), transparent 48%),
+        var(--ink-raised);
+}
+.capability-zone--2 .capability-geometry span:nth-child(1) {
+    border-radius: 50%;
+    border-color: var(--cyan);
+}
+.capability-zone--3 {
+    background:
+        linear-gradient(125deg, rgb(213 173 100 / 8%), transparent 45%),
+        var(--ink-raised);
+}
+.capability-zone--3 .capability-geometry span:nth-child(1) {
+    rotate: 45deg;
+    border-color: var(--gold);
+}
+.capability-zone--4 .capability-geometry span:nth-child(1) {
+    border-radius: 0 50% 0 50%;
+}
+
+.evolution-stations {
+    display: grid;
+    gap: 0;
+}
+.evolution-station {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    gap: 1.1rem;
+    min-height: 13rem;
+}
+.evolution-rail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.evolution-marker {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--green);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.67rem;
+    transition:
+        background 240ms ease,
+        color 240ms ease,
+        box-shadow 240ms ease;
+}
+.evolution-connector {
+    position: absolute;
+    top: 2.6rem;
+    bottom: 0;
+    width: 1px;
+    background: var(--line-strong);
+    transform-origin: top;
+}
+.evolution-connector::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--green), var(--cyan));
+    content: "";
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 650ms ease;
+}
+.evolution-content {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(115deg, rgb(131 185 94 / 6%), transparent 45%),
+        var(--ink-raised);
+    padding: 1.6rem;
+    transition:
+        border-color 250ms ease,
+        background 250ms ease,
+        translate 250ms ease;
+}
+.evolution-content h3 {
+    margin-top: 1.4rem;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+}
+.evolution-content p {
+    max-width: 43rem;
+    margin-top: 0.8rem;
+    color: var(--muted-strong);
+    line-height: 1.75;
+}
+.evolution-signal {
+    display: flex;
+    gap: 0.35rem;
+}
+.evolution-signal i {
+    width: 2rem;
+    height: 2px;
+    background: var(--line-strong);
+}
+.evolution-signal i:nth-child(2) {
+    background: var(--green);
+}
+.evolution-signal i:nth-child(3) {
+    background: var(--cyan);
+}
+.evolution-station.is-active .evolution-marker {
+    border-color: var(--cyan);
+    background: var(--cyan);
+    color: var(--ink);
+    box-shadow: 0 0 1.2rem rgb(123 221 212 / 70%);
+}
+.evolution-station.is-active .evolution-connector::after {
+    transform: scaleY(1);
+}
+.evolution-station.is-active .evolution-content {
+    border-color: rgb(123 221 212 / 65%);
+    background:
+        linear-gradient(115deg, rgb(123 221 212 / 11%), transparent 45%),
+        var(--ink-raised);
+    translate: 0.3rem 0;
+}
+
+.achievement-signals {
+    display: grid;
+    gap: 0.75rem;
+}
+.achievement-signals li {
+    position: relative;
+    min-height: 16rem;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(135deg, rgb(213 173 100 / 9%), transparent 47%),
+        var(--ink-raised);
+    padding: 1.6rem;
+}
+.achievement-signals li > p {
+    position: relative;
+    z-index: 1;
+    color: var(--gold);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 500;
+    letter-spacing: -0.07em;
+}
+.achievement-signals h3 {
+    position: relative;
+    z-index: 1;
+    margin-top: 3.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.achievement-signals li > span:last-child {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--muted-strong);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+.achievement-orbit {
+    position: absolute;
+    top: -3rem;
+    right: -3rem;
+    width: 11rem;
+    height: 11rem;
+    border: 1px solid rgb(213 173 100 / 42%);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.2rem rgb(213 173 100 / 5%);
+    transition: transform 300ms ease;
+}
+.achievement-signals li:hover .achievement-orbit {
+    transform: scale(1.16) rotate(30deg);
+}
+
+.artifact-shelf {
+    display: grid;
+    gap: 0.75rem;
+}
+.artifact {
+    position: relative;
+    display: flex;
+    min-height: 16rem;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+        linear-gradient(130deg, rgb(131 185 94 / 7%), transparent 42%),
+        var(--ink-raised);
+    padding: 1.35rem;
+    transition:
+        border-color 180ms ease,
+        translate 180ms ease,
+        background 180ms ease;
+}
+.artifact:hover {
+    border-color: var(--line-strong);
+    translate: 0 -0.25rem;
+    background:
+        linear-gradient(130deg, rgb(123 221 212 / 10%), transparent 46%),
+        var(--ink-raised);
+}
+.artifact::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-top: 2px solid var(--green);
+    border-right: 2px solid var(--green);
+    content: "";
+}
+.artifact-serial {
+    color: var(--cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.7rem;
+}
+.artifact-eyebrow {
+    margin-top: 1.3rem;
+    color: var(--green);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.61rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.artifact h3 {
+    margin-top: 0.7rem;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+}
+.artifact-summary {
+    margin-top: 0.65rem;
+    color: var(--muted-strong);
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+.artifact-footer {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-top: auto;
+    padding-top: 1.4rem;
+}
+.artifact-footer ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+.artifact-footer li {
+    border: 1px solid var(--line);
+    padding: 0.2rem 0.32rem;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.57rem;
+}
+.artifact-footer a {
+    display: inline-flex;
+    flex: none;
+    gap: 0.35rem;
+    color: var(--cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.66rem;
+}
+.artifact-footer a:hover {
+    color: var(--paper);
+}
+
+.atlas-transmission {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background:
+        linear-gradient(125deg, rgb(131 185 94 / 15%), transparent 39%),
+        var(--ink-raised);
+    padding: clamp(1.6rem, 5vw, 4.5rem);
+}
+.transmission-content {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 2.5rem;
+    margin-top: 1.7rem;
+}
+.transmission-content h2 {
+    max-width: 42rem;
+    font-size: clamp(2.6rem, 6vw, 5.6rem);
+    font-weight: 600;
+    letter-spacing: -0.075em;
+    line-height: 0.88;
+}
+.transmission-content > div > p {
+    max-width: 35rem;
+    margin-top: 1.5rem;
+    color: var(--muted-strong);
+    line-height: 1.8;
+}
+.transmission-console {
+    position: relative;
+    z-index: 1;
+}
+.transmission-console li {
+    border-bottom: 1px solid var(--line);
+}
+.transmission-console a {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr) auto;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.95rem 0;
+}
+.transmission-console a > span:first-child {
+    color: var(--paper);
+}
+.transmission-console a > span:nth-child(2) {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--cyan);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.69rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.transmission-console i {
+    color: var(--green);
+    font-style: normal;
+}
+.transmission-console a:hover {
+    color: var(--cyan);
+}
+.transmission-closing {
+    position: relative;
+    z-index: 1;
+    margin-top: 3rem;
+    color: var(--muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.transmission-orbits span {
+    position: absolute;
+    border: 1px solid rgb(123 221 212 / 25%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.transmission-orbits span:nth-child(1) {
+    top: -15rem;
+    right: -12rem;
+    width: 31rem;
+    height: 31rem;
+}
+.transmission-orbits span:nth-child(2) {
+    top: -7rem;
+    right: -4rem;
+    width: 18rem;
+    height: 18rem;
+    border-color: rgb(131 185 94 / 28%);
+}
+.transmission-orbits span:nth-child(3) {
+    right: 6rem;
+    bottom: -6rem;
+    width: 10rem;
+    height: 10rem;
+    border-color: rgb(213 173 100 / 30%);
+}
+
+.motion-ready [data-reveal] {
+    opacity: 0;
+    translate: 0 1.25rem;
+    transition:
+        opacity 600ms ease var(--reveal-delay, 0ms),
+        translate 650ms cubic-bezier(0.16, 0.8, 0.24, 1)
+            var(--reveal-delay, 0ms);
+}
+.motion-ready [data-reveal].is-visible {
+    opacity: 1;
+    translate: 0 0;
+}
+.motion-ready .atlas-intro.is-visible .atlas-path {
+    animation: atlas-dash 9s linear infinite;
+}
+.motion-ready .atlas-intro.is-visible .atlas-orbit-one {
+    animation: atlas-drift 8s ease-in-out infinite alternate;
+}
+.motion-ready .atlas-intro.is-visible .atlas-orbit-two {
+    animation: atlas-drift 6s ease-in-out infinite alternate-reverse;
+}
+.motion-ready .atlas-transmission.is-visible .transmission-orbits {
+    animation: atlas-drift 12s ease-in-out infinite alternate;
+}
+@keyframes atlas-signal-flow {
+    to {
+        stroke-dashoffset: -30;
+    }
+}
+@keyframes atlas-orbit-spin {
+    to {
+        rotate: 360deg;
+    }
+}
+@keyframes atlas-dash {
+    to {
+        stroke-dashoffset: -120;
+    }
+}
+@keyframes atlas-drift {
+    to {
+        transform: translate(1.25rem, -0.8rem);
+    }
+}
+
+@media (min-width: 48rem) {
+    .atlas-intro {
+        grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+        align-items: center;
+    }
+    .atlas-constellation {
+        min-height: 22rem;
+    }
+    .atlas-chapter {
+        grid-template-columns: minmax(0, 1.22fr) minmax(19rem, 0.78fr);
+        align-items: center;
+    }
+    .atlas-chapter--reverse .atlas-chapter-visual-wrap {
+        grid-column: 2;
+    }
+    .atlas-chapter--reverse .atlas-chapter-copy {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .atlas-chapter--reverse .atlas-chapter-serial {
+        right: auto;
+        left: -0.6rem;
+    }
+    .atlas-project-visual {
+        min-height: 28rem;
+        padding: 2rem;
+    }
+    .atlas-project-visual svg {
+        min-height: 25rem;
+    }
+    .atlas-chapter-copy {
+        padding: 1.5rem 0 1.5rem 2rem;
+    }
+    .about-prose {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2.5rem;
+    }
+    .about-sheet {
+        grid-template-columns: 3.4rem minmax(0, 1fr);
+    }
+    .capability-atlas {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .capability-zone--1 {
+        grid-column: span 2;
+    }
+    .capability-zone--2 {
+        grid-column: span 2;
+    }
+    .capability-zone--3 {
+        grid-column: span 1;
+    }
+    .capability-zone--4 {
+        grid-column: span 3;
+    }
+    .evolution-stations {
+        max-width: 70rem;
+        margin-inline: auto;
+    }
+    .evolution-station {
+        grid-template-columns: 5rem minmax(0, 1fr);
+        min-height: 15rem;
+    }
+    .evolution-content {
+        padding: 2.2rem;
+    }
+    .achievement-signals {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .achievement-signals li:nth-child(1),
+    .achievement-signals li:nth-child(2) {
+        grid-column: span 2;
+    }
+    .achievement-signals li:nth-child(3),
+    .achievement-signals li:nth-child(4) {
+        min-height: 14rem;
+    }
+    .artifact-shelf {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+    .artifact--1,
+    .artifact--4 {
+        grid-column: span 5;
+    }
+    .artifact--2,
+    .artifact--3 {
+        grid-column: span 7;
+    }
+    .artifact--5,
+    .artifact--8 {
+        grid-column: span 4;
+    }
+    .artifact--6 {
+        grid-column: span 5;
+    }
+    .artifact--7 {
+        grid-column: span 3;
+    }
+    .artifact--2,
+    .artifact--6 {
+        min-height: 19rem;
+    }
+    .artifact--3 {
+        min-height: 21rem;
+    }
+    .transmission-content {
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.65fr);
+        align-items: end;
+    }
+}
+
+@media (max-width: 40rem) {
+    .atlas-shell {
+        width: min(100% - 2rem, 90rem);
+    }
+    .atlas-section {
+        padding-block: 4.5rem;
+    }
+    .atlas-section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .atlas-section-heading h2 {
+        font-size: clamp(2.45rem, 13vw, 3.5rem);
+    }
+    .atlas-chapter-serial {
+        top: -2.2rem;
+        font-size: 9rem;
+    }
+    .atlas-chapter-copy {
+        padding-left: 1rem;
+    }
+    .atlas-project-visual {
+        min-height: 16rem;
+    }
+    .atlas-project-visual svg {
+        min-height: 16rem;
+    }
+    .about-ruler {
+        gap: 1rem;
+    }
+    .about-content {
+        padding: 1.5rem;
+    }
+    .about-content h2 {
+        font-size: clamp(2.3rem, 12vw, 3.5rem);
+    }
+    .achievement-signals li {
+        min-height: 13rem;
+    }
+    .transmission-console a {
+        grid-template-columns: 4.4rem minmax(0, 1fr) auto;
+    }
+    .transmission-content h2 {
+        font-size: clamp(2.4rem, 12vw, 3.5rem);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

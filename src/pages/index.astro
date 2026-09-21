@@ -1,0 +1,46 @@
+---
+import { enIntl } from "../content/portfolio/en-intl";
+import Layout from "../layouts/Layout.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+const englishUrl = `${baseUrl}en-intl/`;
+---
+
+<Layout
+    title={enIntl.redirect.title}
+    description={enIntl.meta.description}
+    language="en"
+>
+    <main class="grid min-h-screen place-items-center px-6 text-center">
+        <div class="max-w-md border border-[var(--line)] bg-[var(--ink-raised)] p-8">
+            <span
+                class="font-mono text-xs text-[var(--green)]"
+                aria-hidden="true"
+            >
+                $
+            </span>
+            <p class="mt-4 text-[var(--muted-strong)]">
+                {enIntl.redirect.message}
+            </p>
+            <noscript>
+                <a
+                    class="mt-6 inline-flex font-mono text-sm text-[var(--cyan)] underline underline-offset-4"
+                    href={englishUrl}
+                >
+                    {enIntl.redirect.linkLabel}
+                </a>
+            </noscript>
+        </div>
+    </main>
+    <script define:vars={{ baseUrl }}>
+        const languages = navigator.languages?.length
+            ? navigator.languages
+            : [navigator.language];
+        const locale = languages.some((language) =>
+            language.toLowerCase().startsWith("pt"),
+        )
+            ? "pt-br"
+            : "en-intl";
+        window.location.replace(`${baseUrl}${locale}/`);
+    </script>
+</Layout>

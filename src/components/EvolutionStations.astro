@@ -1,0 +1,36 @@
+---
+import type { TimelineItem } from "../content/portfolio/schema";
+
+interface Props {
+    readonly items: readonly TimelineItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="evolution-stations">
+    {items.map((item, index) => (
+        <li
+            class="evolution-station"
+            data-evolution-station
+            data-reveal
+            style={`--reveal-delay: ${index * 80}ms`}
+        >
+            <div class="evolution-rail" aria-hidden="true">
+                <span class="evolution-marker">{item.period}</span>
+                {index < items.length - 1 && (
+                    <span class="evolution-connector"></span>
+                )}
+            </div>
+            <article class="evolution-content">
+                <div class="evolution-signal" aria-hidden="true">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+            </article>
+        </li>
+    ))}
+</ol>

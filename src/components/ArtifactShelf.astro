@@ -1,0 +1,45 @@
+---
+import type { Project } from "../content/portfolio/schema";
+
+interface Props {
+    readonly projects: readonly Project[];
+    readonly sourceLabel: string;
+    readonly externalLabel: string;
+    readonly stackLabel: string;
+}
+
+const { projects, sourceLabel, externalLabel, stackLabel } = Astro.props;
+---
+
+<ol class="artifact-shelf">
+    {projects.map((project, index) => (
+        <li
+            class={`artifact artifact--${index + 1}`}
+            data-reveal
+            style={`--reveal-delay: ${index * 55}ms`}
+        >
+            <p class="artifact-serial" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+            </p>
+            <p class="artifact-eyebrow">{project.eyebrow}</p>
+            <h3>{project.name}</h3>
+            <p class="artifact-summary">{project.summary}</p>
+            <div class="artifact-footer">
+                <ul aria-label={stackLabel}>
+                    {project.stack.slice(0, 3).map((item) => (
+                        <li>{item}</li>
+                    ))}
+                </ul>
+                <a
+                    href={project.repositoryUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <span>{sourceLabel}</span>
+                    <span aria-hidden="true">↗</span>
+                    <span class="sr-only">({externalLabel})</span>
+                </a>
+            </div>
+        </li>
+    ))}
+</ol>

@@ -1,0 +1,15 @@
+---
+import PortfolioPage from "../../components/PortfolioPage.astro";
+import { enIntl } from "../../content/portfolio/en-intl";
+import Layout from "../../layouts/Layout.astro";
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<Layout
+    title={enIntl.meta.title}
+    description={enIntl.meta.description}
+    language={enIntl.languageTag}
+>
+    <PortfolioPage content={enIntl} baseUrl={baseUrl} />
+</Layout>

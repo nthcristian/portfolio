@@ -1,0 +1,28 @@
+---
+import "../styles/global.css";
+
+interface Props {
+    readonly title: string;
+    readonly description: string;
+    readonly language: string;
+}
+
+const { title, description, language } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang={language}>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content={description} />
+        <meta name="theme-color" content="#090d12" />
+        <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
+        <link rel="icon" href={`${baseUrl}favicon.ico`} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <slot />
+    </body>
+</html>

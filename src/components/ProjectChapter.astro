@@ -1,0 +1,56 @@
+---
+import type { Project } from "../content/portfolio/schema";
+import ProjectAtlasVisual from "./ProjectAtlasVisual.astro";
+
+interface Props {
+    readonly project: Project;
+    readonly index: number;
+    readonly sourceLabel: string;
+    readonly externalLabel: string;
+    readonly stackLabel: string;
+}
+
+const { project, index, sourceLabel, externalLabel, stackLabel } = Astro.props;
+const serial = String(index + 1).padStart(2, "0");
+---
+
+<article
+    class:list={[
+        "atlas-chapter",
+        { "atlas-chapter--reverse": index % 2 === 1 },
+    ]}
+    data-project-chapter
+    data-reveal
+    style={`--reveal-delay: ${index * 90}ms`}
+>
+    <div class="atlas-chapter-serial" aria-hidden="true">
+        {serial}
+    </div>
+    <div class="atlas-chapter-visual-wrap">
+        {project.visual && <ProjectAtlasVisual kind={project.visual} />}
+    </div>
+    <div class="atlas-chapter-copy">
+        <p class="eyebrow">
+            <span>{serial}</span>
+            {project.eyebrow}
+        </p>
+        <h3>{project.name}</h3>
+        <p class="atlas-summary">{project.summary}</p>
+        <p class="atlas-details">{project.details}</p>
+        <ul class="atlas-stack" aria-label={stackLabel}>
+            {project.stack.map((item) => (
+                <li>{item}</li>
+            ))}
+        </ul>
+        <a
+            class="atlas-source"
+            href={project.repositoryUrl}
+            target="_blank"
+            rel="noreferrer"
+        >
+            <span>{sourceLabel}</span>
+            <span aria-hidden="true">↗</span>
+            <span class="sr-only">({externalLabel})</span>
+        </a>
+    </div>
+</article>

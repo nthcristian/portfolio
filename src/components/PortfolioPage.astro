@@ -1,0 +1,248 @@
+---
+import type { PortfolioContent } from "../content/portfolio/schema";
+import ArtifactShelf from "./ArtifactShelf.astro";
+import AtlasIntro from "./AtlasIntro.astro";
+import CapabilityAtlas from "./CapabilityAtlas.astro";
+import EvolutionStations from "./EvolutionStations.astro";
+import Hero from "./Hero.astro";
+import MotionEnhancement from "./MotionEnhancement.astro";
+import ProjectChapter from "./ProjectChapter.astro";
+import SiteHeader from "./SiteHeader.astro";
+
+interface Props {
+    readonly content: PortfolioContent;
+    readonly baseUrl: string;
+}
+
+const { content, baseUrl } = Astro.props;
+const workId = content.navigation[0]!.href.slice(1);
+const aboutId = content.navigation[1]!.href.slice(1);
+const trajectoryId = content.navigation[2]!.href.slice(1);
+const contactId = content.navigation[3]!.href.slice(1);
+---
+
+<SiteHeader
+    name={content.hero.name}
+    monogram={content.hero.monogram}
+    navigation={content.navigation}
+    skipLabel={content.labels.skipToContent}
+    navigationLabel={content.labels.primaryNavigation}
+/>
+
+<main id="main-content" tabindex="-1">
+    <Hero content={content} baseUrl={baseUrl} />
+
+    <div class="atlas-shell">
+        <AtlasIntro content={content.atlas} />
+
+        <section
+            id={workId}
+            class="atlas-section atlas-work"
+            aria-labelledby="work-title"
+            data-section
+        >
+            <div class="atlas-section-heading" data-reveal>
+                <div>
+                    <p class="eyebrow">
+                        <span>01</span>
+                        {content.labels.selectedWork}
+                    </p>
+                    <h2 id="work-title">{content.projects.title}</h2>
+                </div>
+                <p>{content.projects.introduction}</p>
+            </div>
+
+            <div class="atlas-chapters">
+                {content.projects.items.map((project, index) => (
+                    <ProjectChapter
+                        project={project}
+                        index={index}
+                        sourceLabel={content.labels.sourceCode}
+                        externalLabel={content.labels.openExternal}
+                        stackLabel={content.labels.technologyStack}
+                    />
+                ))}
+            </div>
+        </section>
+
+        <section
+            id={aboutId}
+            class="atlas-section atlas-about"
+            aria-labelledby="about-title"
+            data-section
+        >
+            <div class="about-sheet" data-reveal>
+                <div class="about-ruler" aria-hidden="true">
+                    <span>01</span>
+                    <span>02</span>
+                    <span>03</span>
+                    <span>04</span>
+                    <span>05</span>
+                    <span>06</span>
+                    <span>07</span>
+                    <span>08</span>
+                </div>
+                <div class="about-content">
+                    <p class="eyebrow">
+                        <span>02</span>
+                        {content.about.eyebrow}
+                    </p>
+                    <h2 id="about-title">{content.about.title}</h2>
+                    <div class="about-prose">
+                        {content.about.paragraphs.map((paragraph) => (
+                            <p>{paragraph}</p>
+                        ))}
+                    </div>
+                    <p class="about-signal">
+                        <span aria-hidden="true">↳</span>
+                        {content.about.note}
+                    </p>
+                </div>
+                <div class="about-stamp" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="atlas-section" aria-labelledby="capabilities-title">
+            <div class="atlas-section-heading" data-reveal>
+                <div>
+                    <p class="eyebrow">
+                        <span>03</span>
+                        {content.labels.capabilities}
+                    </p>
+                    <h2 id="capabilities-title">
+                        {content.labels.capabilities}
+                    </h2>
+                </div>
+                <p>{content.labels.capabilitiesDescription}</p>
+            </div>
+            <CapabilityAtlas groups={content.capabilities} />
+        </section>
+
+        <section
+            id={trajectoryId}
+            class="atlas-section atlas-evolution"
+            aria-labelledby="trajectory-title"
+            data-section
+        >
+            <div class="atlas-section-heading" data-reveal>
+                <div>
+                    <p class="eyebrow">
+                        <span>04</span>
+                        {content.labels.trajectory}
+                    </p>
+                    <h2 id="trajectory-title">{content.labels.trajectory}</h2>
+                </div>
+            </div>
+            <EvolutionStations items={content.timeline} />
+        </section>
+
+        <section class="atlas-section" aria-labelledby="achievements-title">
+            <div class="atlas-section-heading" data-reveal>
+                <div>
+                    <p class="eyebrow">
+                        <span>05</span>
+                        {content.labels.achievements}
+                    </p>
+                    <h2 id="achievements-title">
+                        {content.labels.achievements}
+                    </h2>
+                </div>
+            </div>
+            <ol class="achievement-signals">
+                {content.achievements.map((achievement, index) => (
+                    <li data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+                        <span
+                            class="achievement-orbit"
+                            aria-hidden="true"
+                        ></span>
+                        <p>{achievement.value}</p>
+                        <h3>{achievement.label}</h3>
+                        <span>{achievement.detail}</span>
+                    </li>
+                ))}
+            </ol>
+        </section>
+
+        <section
+            class="atlas-section atlas-artifacts"
+            aria-labelledby="experiments-title"
+        >
+            <div class="atlas-section-heading" data-reveal>
+                <div>
+                    <p class="eyebrow">
+                        <span>06</span>
+                        {content.labels.moreExperiments}
+                    </p>
+                    <h2 id="experiments-title">
+                        {content.labels.moreExperiments}
+                    </h2>
+                </div>
+                <p>{content.labels.experimentsDescription}</p>
+            </div>
+            <ArtifactShelf
+                projects={content.experiments}
+                sourceLabel={content.labels.sourceCode}
+                externalLabel={content.labels.openExternal}
+                stackLabel={content.labels.technologyStack}
+            />
+        </section>
+
+        <section
+            id={contactId}
+            class="atlas-transmission"
+            aria-labelledby="contact-title"
+            data-section
+            data-reveal
+        >
+            <div class="transmission-orbits" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p class="eyebrow">
+                <span>07</span>
+                {content.footer.eyebrow}
+            </p>
+            <div class="transmission-content">
+                <div>
+                    <h2 id="contact-title">{content.footer.title}</h2>
+                    <p>{content.footer.invitation}</p>
+                </div>
+                <ul class="transmission-console">
+                    {content.footer.links.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                target={
+                                    link.href.startsWith("mailto:")
+                                        ? undefined
+                                        : "_blank"
+                                }
+                                rel={
+                                    link.href.startsWith("mailto:")
+                                        ? undefined
+                                        : "noreferrer"
+                                }
+                            >
+                                <span>{link.label}</span>
+                                <span>{link.detail}</span>
+                                <i aria-hidden="true">↗</i>
+                                {!link.href.startsWith("mailto:") && (
+                                    <span class="sr-only">
+                                        ({content.labels.openExternal})
+                                    </span>
+                                )}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <p class="transmission-closing">{content.footer.closing}</p>
+        </section>
+    </div>
+    <MotionEnhancement />
+</main>
