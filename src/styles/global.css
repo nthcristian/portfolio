@@ -1131,6 +1131,24 @@ body {
     .atlas-shell {
         width: min(100% - 2rem, 90rem);
     }
+    .site-header {
+        gap: 0.75rem;
+    }
+    .site-navigation-list {
+        gap: 0.8rem;
+        letter-spacing: 0.08em;
+    }
+    .site-navigation-link {
+        display: inline-flex;
+        min-width: 1.35rem;
+        justify-content: center;
+    }
+    .site-navigation-link .nav-number {
+        margin-right: 0;
+    }
+    .site-navigation-link .nav-label {
+        display: none;
+    }
     .atlas-section {
         padding-block: 4.5rem;
     }

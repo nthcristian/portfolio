@@ -18,7 +18,7 @@ const { name, monogram, navigation, skipLabel, navigationLabel } = Astro.props;
 <a class="skip-link" href="#main-content">
     {skipLabel}
 </a>
-<header class="mx-auto flex w-full max-w-[90rem] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:px-12">
+<header class="site-header mx-auto flex w-full max-w-[90rem] items-center justify-between gap-6 px-5 py-5 sm:px-8 lg:px-12">
     <a
         class="group flex items-center gap-3"
         href="#main-content"
@@ -32,19 +32,20 @@ const { name, monogram, navigation, skipLabel, navigationLabel } = Astro.props;
         </span>
     </a>
 
-    <nav aria-label={navigationLabel}>
-        <ul class="flex items-center gap-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[var(--muted)] sm:gap-6">
+    <nav class="site-navigation" aria-label={navigationLabel}>
+        <ul class="site-navigation-list flex items-center gap-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-[var(--muted)] sm:gap-6">
             {navigation.map((item, index) => (
                 <li>
                     <a
-                        class="transition-colors hover:text-[var(--paper)] focus-visible:text-[var(--paper)]"
+                        class="site-navigation-link transition-colors hover:text-[var(--paper)] focus-visible:text-[var(--paper)]"
                         href={item.href}
                         data-section-nav
+                        aria-label={item.label}
                     >
-                        <span class="mr-1 text-[var(--green)]">
+                        <span class="nav-number mr-1 text-[var(--green)]">
                             0{index + 1}
                         </span>
-                        {item.label}
+                        <span class="nav-label">{item.label}</span>
                     </a>
                 </li>
             ))}
